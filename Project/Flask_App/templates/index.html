@@ -7,18 +7,71 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <style>
+    .container {
+      margin-top: 50px;
+    }
+    
+    h1 {
+      text-align: center;
+      background-color: #337ab7;
+      color: white;
+      padding: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      font-weight: bold;
+    }
+    
+    .btn-success {
+      margin-top: 20px;
+    }
+    
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      display: none; /* Hide the popup by default */
+    }
+    
+    .popup.active {
+      display: block; /* Show the popup when active */
+    }
+    
+    .close-button {
+      cursor: pointer;
+    }
+  </style>
+  
+  <script>
+    $(document).ready(function() {
+      $('.close-button').click(function() {
+        $('.popup').removeClass('active'); // Remove the active class to hide the popup
+      });
+    });
+  </script>
 </head>
 <body>
 
 <div class="container">
-  <h1 class="jumbotron bg-primary">Vehicle Damage Assessment and Cost Estimation</h1>
+  <h1>Vehicle Damage Assessment and Cost Estimation</h1>
   <br><br>
   <form class="form-horizontal" action="/submit" method="post" enctype="multipart/form-data">
-
     <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Upload Your Image :</label>
+      <label class="control-label col-sm-2" for="pwd">Upload Your Image:</label>
       <div class="col-sm-10">          
-        <input type="file" class="form-control" placeholder="Hours Studied"  name="my_image" id="pwd">
+        <input type="file" class="form-control" name="my_image" id="pwd">
       </div>
     </div>
 
@@ -29,20 +82,20 @@
     </div>
   </form>
 
-	{% if prediction %}
-  <img src="{{img_path}}" height="400px" width="400px">
-	<h2> Damage Check : <i> {{prediction[0]}} </i> <br>Damage Localization : <i> {{prediction[1]}} </i><br> Damage Extremity : <i> {{prediction[2]}} </i></h2>
-    <br><br>
-    <h2> Damaged Parts: <i> {{prediction[3]}} </i>
-	{% endif %}
+  {% if prediction %}
+    <div class="popup active">
+      <img src="{{img_path}}" height="400px" width="400px">
+      <h2>Damage Check: <i>{{prediction[0]}}</i></h2>
+      <h2>Damage Localization: <i>{{prediction[1]}}</i></h2>
+      <h2>Damage Extremity: <i>{{prediction[2]}}</i></h2>
+      <br><br>
+      <h2>Damaged Parts: <i>{{prediction[3]}}</i></h2>
+      <h2>Estimated Price: <i>{{prediction[4]}}</i></h2> <!-- Added Estimated Price -->
+      <button class="close-button btn btn-primary">OK</button>
+    </div>
+  {% endif %}
 
 </div>
-
-
-
-
-
-
 
 </body>
 </html>
