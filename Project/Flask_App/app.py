@@ -7,12 +7,12 @@ from tensorflow.keras.preprocessing.image import load_img
 import numpy as np
 import cv2
 
-app = Flask(__name__)
+app = Flask(_name_)
 
-model = load_model('C:/Users/user/stage1.h5')
-model2 = load_model('C:/Users/user/stage2new.h5')
-model3 = load_model('C:/Users/user/stage31.h5')
-parts_model = load_model('D:/Car-Genesis-main/Car-Genesis-main/Trained Model/vehicle_weights.h5')
+model = load_model('C:/Users/harsh/smartbridge/models/stage1.h5')
+model2 = load_model('C:/Users/harsh/smartbridge/models/stage2new.h5')
+model3 = load_model('C:/Users/harsh/smartbridge/models/stage31.h5')
+parts_model = load_model('C:/Users/harsh/smartbridge/models/vehicle_weights.h5')
 
 def predict_label(img_path):
     res = []
@@ -78,35 +78,52 @@ def predict_label(img_path):
             s+=class_dict[ind]+', '
             ind = ind+1
 
-    res.append(s)        
+    res.append(s)
+    
+    # Price estimation based on model predictions
+    price = 0.0
+    if res[0] == "damaged":
+        if res[1] == "front":
+            price += 50  # Add cost for front damage
+        elif res[1] == "rear":
+            price += 40  # Add cost for rear damage
+        elif res[1] == "side":
+            price += 30  # Add cost for side damage
+
+        if res[2] == "minor damage":
+            price += 10  # Add cost for minor damage
+        elif res[2] == "moderate damage":
+            price += 20  # Add cost for moderate damage
+        elif res[2] == "severe damage":
+            price += 30  # Add cost for severe damage
+
+        # Add cost for each damaged part
+        damaged_parts = res[3].split(', ')
+        price += len(damaged_parts) * 10
+    
+    res.append(f"${price:.2f}")
     
     return res
     
-        
-
-
-# routes
+# Routes
 @app.route("/", methods=['GET', 'POST'])
 def main():
-	return render_template("index.html")
+    return render_template("index.html")
 
 @app.route("/about")
 def about_page():
-	return "Please subscribe  Artificial Intelligence Hub..!!!"
+    return "Please subscribe to Artificial Intelligence Hub..!!!"
 
-@app.route("/submit", methods = ['GET', 'POST'])
+@app.route("/submit", methods=['GET', 'POST'])
 def get_output():
-	if request.method == 'POST':
-		img = request.files['my_image']
+    if request.method == 'POST':
+        img = request.files['my_image']
+        img_path = "static/" + img.filename	
+        img.save(img_path)
+        p = predict_label(img_path)
 
-		img_path = "static/" + img.filename	
-		img.save(img_path)
-
-		p = predict_label(img_path)
-
-	return render_template("index.html", prediction = p, img_path = img_path)
+    return render_template("index.html", prediction=p, img_path=img_path)
 
 
-if __name__ =='__main__':
-	#app.debug = True
-	app.run(debug = True)
+if _name_ == '_main_':
+    app.run(debug=True)
