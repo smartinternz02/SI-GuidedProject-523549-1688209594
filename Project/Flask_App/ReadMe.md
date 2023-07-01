@@ -1,4 +1,4 @@
-# Flask Application for Emotion and Sign Language Detection
+# Flask Application for Vehicle Damage Assessment and Cost Estimation
 
 This folder contains the files required to run our flask application forIntelligent vehicle damage assessment and cost estimation with images.
 
