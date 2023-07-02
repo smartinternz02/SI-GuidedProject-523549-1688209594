@@ -63,3 +63,11 @@ Steps for running the Flask Application is mentioned in the `./Project/Flask_app
 The IPYNB files for training the Convolutional Neural Networks (CNN) in all three models ofdamage estimation, along with other specifications and details can be found in the `./Project/IPYNB Files/` directory.
 
 By accessing these IPYNB files, users can gain insights into the training process, model architecture, and evaluation metrics employed for both Emotion and Sign Language Detection. Additionally, the associated *Datasets* utilized for training these models are also included.
+
+
+
+
+
+![WhatsApp Image 2023-07-02 at 19 30 22](https://github.com/smartinternz02/SI-GuidedProject-523549-1688209594/assets/76875424/0b69dcf3-36a8-4de3-b174-32795dcf6bf9)
+
+
