@@ -70,4 +70,8 @@ By accessing these IPYNB files, users can gain insights into the training proces
 
 ![WhatsApp Image 2023-07-02 at 19 30 22](https://github.com/smartinternz02/SI-GuidedProject-523549-1688209594/assets/76875424/0b69dcf3-36a8-4de3-b174-32795dcf6bf9)
 
+![WhatsApp Image 2023-07-02 at 19 31 08](https://github.com/smartinternz02/SI-GuidedProject-523549-1688209594/assets/76875424/70359d15-ffc5-4a71-b405-56ac29da6106)
+
+![WhatsApp Image 2023-07-02 at 19 30 02](https://github.com/smartinternz02/SI-GuidedProject-523549-1688209594/assets/76875424/2aff4d55-867c-474b-a2c9-b3e091d2c00d)
+
 
